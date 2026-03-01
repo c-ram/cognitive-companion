@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-api-gateway
+  labels:
+    app: ai-api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-api-gateway
+  template:
+    metadata:
+      labels:
+        app: ai-api-gateway
+    spec:
+      containers:
+      - name: ai-api-gateway
+        image: localhost:32000/ai-api-gateway:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8100
+        env:
+        - name: VLLM_TRANSLATE_API_URL
+          value: "http://vllm-svc.default.svc.cluster.local:8001/v1/"
+        - name: VLLM_COSMOS_API_URL
+          value: "http://vllm-svc.default.svc.cluster.local:8000/v1/"
+        - name: OLLAMA_API_URL
+          value: "http://<IP ADDRESS>:11434/v1/"
+        - name: TTS_API_URL
+          value: "http://<IP-ADDRESS>/v1/"
+        - name: HOME_ASSISTANT_URL
+          value: "http://homeassistant.local:8123"
+        - name: HOME_ASSISTANT_TOKEN
+          value: ""
+        - name: WHATSAPP_API_URL
+          value: "https://graph.facebook.com/v17.0/"
+        - name: WHATSAPP_TOKEN
+          value: "replace_me"
+        - name: MINIO_ENDPOINT
+          valueFrom:
+            configMapKeyRef:
+              name: minio-config
+              key: MINIO_ENDPOINT
+        - name: MINIO_BUCKET_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: minio-config
+              key: MINIO_BUCKET_NAME
+        - name: MINIO_SECURE
+          valueFrom:
+            configMapKeyRef:
+              name: minio-config
+              key: MINIO_SECURE
+        - name: MINIO_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-secret
+              key: MINIO_ACCESS_KEY
+        - name: MINIO_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-secret
+              key: MINIO_SECRET_KEY
+        resources:
+          limits:
+            cpu: "1"
+            memory: "2Gi"
+          requests:
+            cpu: "500m"
+            memory: "1Gi"

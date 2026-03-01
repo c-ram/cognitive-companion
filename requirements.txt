@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+python-multipart
+httpx
+gradio
+ffmpeg-python
+pydantic
+openai
+requests
+boto3
+sqlalchemy
+apscheduler
+edge-tts
+pydantic-settings
+Pillow
+Wand
