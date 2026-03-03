@@ -2,7 +2,7 @@
 
 A privacy-first AI watchdog for multigenerational households, designed to support seniors facing early cognitive decline while preserving their independence and dignity.  
 
-[▶️Long Introduction + Demo Video (7 minutes)](https://www.youtube.com/watch?v=38H_yJTrEFg)
+[▶️Long Introduction + Demo Video (6 minutes)](https://www.youtube.com/watch?v=I3kpxpHs_us)
 
 [▶️Short 3-minute Demo Video](https://www.youtube.com/watch?v=xOt1Kyekdec)
 
